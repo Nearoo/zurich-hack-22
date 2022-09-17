@@ -1,5 +1,6 @@
-import { Button, Card, Form, Input, Space, Typography } from 'antd';
+import { Avatar, Button, Card, Col, Form, Input, Row, Space, Spin, Typography } from 'antd';
 import { useState } from 'react';
+import { StarOutlined, StarFilled } from "@ant-design/icons"
 
 import { DropdownSimple, SimpleMap } from './simple';
 const { Title } = Typography;
@@ -15,6 +16,8 @@ export const EnterData = ({onSubmit}) => {
     const [pourRev, setPourRev] = useState(50_000);
     const [pourStar, setPourStar] = useState(4);
 
+    const [isLoading, setLoading] = useState(false);
+
     return <Space direction="vertical">
         <Form
             labelCol={{
@@ -25,36 +28,55 @@ export const EnterData = ({onSubmit}) => {
                 span: 8
             }}
         >
-            <Title level={4}>Insure Concrete Delivery</Title>
+            <Title level={4}>Create Insurance</Title>
             <Form.Item
                 label="Water / Cement Ratio"
             >
-                <Input placeholder={wcr} onChange={v => setWcr(+v.nativeEvent.target.value)}></Input>
+                <Input placeholder={wcr} defaultValue={wcr} onChange={v => setWcr(+v.nativeEvent.target.value)}></Input>
             </Form.Item>
             <Form.Item
-                label="Aggregat / Cement Ratio"
+                label="Aggregate / Cement Ratio"
             >
-                <Input placeholder={acr} onChange={v => setAcr(v.nativeEvent.target.value)}></Input>
+                <Input placeholder={acr} defaultValue={acr} onChange={v => setAcr(v.nativeEvent.target.value)}></Input>
             </Form.Item>
 
             <Form.Item
                 label="Minimum Concrete Strength"
             >
-                <Input placeholder={concrStrength} onChange={v => setCncrStr(v.nativeEvent.target.value)}></Input>
+                <Input placeholder={concrStrength} defaultValue={concrStrength} onChange={v => setCncrStr(v.nativeEvent.target.value)}></Input>
             </Form.Item>
 
             <Form.Item
                 label="Poure Rating"
             >
-                <Input placeholder={pourStar} onChange={v => setPourStar(v.nativeEvent.target.value)}></Input>
+                <Input defaultValue={pourStar} placeholder={pourStar} onChange={v => setPourStar(v.nativeEvent.target.value)}></Input>
             </Form.Item>
 
             <Form.Item
                 label="Expected Failure Cost"
             >
-                <Input placeholder={pourRev} onChange={v => setPourRev(v.nativeEvent.target.value)}></Input>
+                <Input placeholder={pourRev} defaultValue={pourRev} onChange={v => setPourRev(v.nativeEvent.target.value)}></Input>
             </Form.Item>
-            <Card>Hello</Card>
+            <Form.Item
+                label="Pour Quality Certificate"
+                >
+            <Card>
+                <Row align="center">
+                    <Col span={8}>
+                <Avatar size={64} src={`${process.env.PUBLIC_URL}/profile.png`} />
+                    </Col>
+                    <Col span={16}>
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+                <StarFilled />
+                <StarOutlined />
+                <br />
+                Max Mustermann
+                    </Col>
+                </Row>
+                </Card>
+            </Form.Item>
             {/* <Form.Item
                 label="Concrete Type"
             >
@@ -67,12 +89,18 @@ export const EnterData = ({onSubmit}) => {
             </Form.Item>
         </Form>
 
-        <Button block type="primary" onClick={() => onSubmit({
-            wcr, acr, long, lat, req_strength: concrStrength,
-            pour_star: pourStar, pour_revenue: pourRev
-
-        })}>
-            Submit
+        <Button block type="primary" onClick={() => {
+            setLoading(true);
+            onSubmit({
+                wcr, acr, long, lat, req_strength: concrStrength,
+                pour_star: pourStar, pour_revenue: pourRev
+        })}
+        }
+        
+        style={{
+            marginBottom: "50px"
+        }}>
+            {isLoading ? <Spin /> : "Submit"}
         </Button>
 
     </Space>

@@ -17,8 +17,7 @@ const App = () => (
       <Layout>
         <Space direction="vertical">
           <PageHeader
-            title="Concrete Concrete"
-            ghost={false}/>
+            ghost={false}><Title level={3} keyboard italic >Concrete Insurance</Title></PageHeader>
           <Content>
           <Row>
             <Col span={2}></Col>

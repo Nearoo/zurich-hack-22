@@ -20,7 +20,7 @@ export const Body = () => {
 
     const [reqRes, setReqRes] = useState(null);
     const fetchReqRes = reqData => {
-        const fetchUrl = "https://3ce9-194-230-148-102.ngrok.io/";
+        const fetchUrl = "https://f86a-194-230-148-102.ngrok.io/";
         const fetchParams = new URLSearchParams({req_strength: 1, pour_revenue: 10_000, pour_star: 4, ...reqData});
         const reqUrl = `${fetchUrl}get_quote?${fetchParams}`;
         console.log("Stitched together req url", reqUrl)
