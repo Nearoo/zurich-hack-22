@@ -23,7 +23,6 @@ export const DropdownSimple = ({items, title, onSelect}) => {
 
 
 export const SimpleMap = () => {
-    const [map, setMap] = useState(null);
     const ref = useRef();
     useEffect(()=>{
         if(!ref.current)
@@ -32,7 +31,6 @@ export const SimpleMap = () => {
                     { lat: 47.40013610518291, lng: 8.50934637970123 }
             });
     })
-
 
     return <div id="map"
     style={{
